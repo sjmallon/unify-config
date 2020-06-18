@@ -1,6 +1,6 @@
 const mockFs = require('mock-fs')
 
-const UnifyConfig = require('..')
+const UnifySecrets = require('..')
 
 beforeAll(() => {
   mockFs({
@@ -17,7 +17,7 @@ afterAll(() => {
 
 describe('Basics', () => {
   test('A new config is empty', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     expect(c.config).toEqual({})
   })
 })
@@ -26,14 +26,14 @@ describe('Environment variables', () => {
   test('Adding an environment variable', () => {
     const testValue = 'Test string'
     process.env['TEST_VAR_78'] = testValue
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.addEnv('TEST_VAR_78')
     expect(v).toEqual(testValue)
     expect(c.config.TEST_VAR_78).toEqual(testValue)
   })
 
   test('Adding an non-environment variable should fail', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.addEnv('NOT_EXISTING')
     expect(v).toBeNull()
     expect(c.config.TEST_VAR_78).toBeUndefined()
@@ -42,14 +42,14 @@ describe('Environment variables', () => {
 
 describe('Docker secrets', () => {
   test('Adding a secret', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.addSecret('secret')
     expect(v).toEqual('secret value')
     expect(c.config.secret).toEqual('secret value')
   })
 
   test('Adding a non-existant secret should fail', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.addSecret('nonsecret')
     expect(v).toBeNull()
     expect(c.config.secret).toBeUndefined()
@@ -61,14 +61,14 @@ describe('Combined', () => {
     const testName = 'ENV_VAR_23'
     const testValue = 'Test string 2'
     process.env[testName] = testValue
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.add(testName)
     expect(v).toEqual(testValue)
     expect(c.config[testName]).toEqual(testValue)
   })
 
   test('Adding from a docker secret', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.add('secret')
     expect(v).toEqual('secret value')
     expect(c.config.secret).toEqual('secret value')
@@ -78,14 +78,14 @@ describe('Combined', () => {
     const testName = 'secret'
     const testValue = 'Env Secret'
     process.env[testName] = testValue
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.add('secret')
     expect(v).toEqual('secret value')
     expect(c.config.secret).toEqual('secret value')
   })
 
   test('Adding when neither a docker secret nor env var exists should fail', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.add('nowhere')
     expect(v).toBeNull()
     expect(c.config.nowhere).toBeUndefined()
@@ -97,7 +97,7 @@ describe('Adding lists', () => {
     const testName = 'ENV_VAR_45'
     const testValue = 'Test string 3'
     process.env[testName] = testValue
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.addList([testName, 'secret'])
     expect(v).toHaveLength(2)
     expect(v).toContain('secret value')
@@ -108,7 +108,7 @@ describe('Adding lists', () => {
 
 describe('Adding all secrets', () => {
   test('Add all secrets', () => {
-    let c = new UnifyConfig()
+    let c = new UnifySecrets()
     let v = c.addAllSecrets()
     expect(v).toHaveLength(2)
     expect(v).toContain('secret value')

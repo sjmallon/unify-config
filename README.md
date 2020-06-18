@@ -16,23 +16,24 @@ npm install --save  unify-config
 
 ### Motivation
 
-<a name="UnifyConfig"></a>
+<a name="UnifySecrets"></a>
 
-## UnifyConfig
+## UnifySecrets
 
 **Kind**: global class
 
-- [UnifyConfig](#UnifyConfig)
-  - [new UnifyConfig()](#new_UnifyConfig_new)
-  - [.addEnv(name)](#UnifyConfig+addEnv) ⇒ <code>string</code>
-  - [.addSecret(name)](#UnifyConfig+addSecret) ⇒ <code>string</code>
-  - [.add(name)](#UnifyConfig+add) ⇒ <code>string</code>
-  - [.addList(names)](#UnifyConfig+addList) ⇒ <code>Array.&lt;string&gt;</code>
-  - [.addAllSecrets()](#UnifyConfig+addAllSecrets) ⇒ <code>Array.&lt;string&gt;</code>
+- [UnifySecrets](#UnifySecrets)
+  - [new UnifySecrets()](#new_UnifySecrets_new)
+  - [.config](#UnifySecrets+config)
+  - [.addEnv(name)](#UnifySecrets+addEnv) ⇒ <code>string</code>
+  - [.addSecret(name)](#UnifySecrets+addSecret) ⇒ <code>string</code>
+  - [.add(name)](#UnifySecrets+add) ⇒ <code>string</code>
+  - [.addList(names)](#UnifySecrets+addList) ⇒ <code>Array.&lt;string&gt;</code>
+  - [.addAllSecrets()](#UnifySecrets+addAllSecrets) ⇒ <code>Array.&lt;string&gt;</code>
 
-<a name="new_UnifyConfig_new"></a>
+<a name="new_UnifySecrets_new"></a>
 
-### new UnifyConfig()
+### new UnifySecrets()
 
 Support setting application config values from either environment values or docker secrets
 
@@ -42,65 +43,73 @@ Provides a unified mechanism to load configurations whether running as:
 - under docker-compose using docker secrets
 - under docker swarm using docker secrets
 
-<a name="UnifyConfig+addEnv"></a>
+<a name="UnifySecrets+config"></a>
 
-### unifyConfig.addEnv(name) ⇒ <code>string</code>
+### unifySecrets.config
+
+Get full config object
+
+**Kind**: instance property of [<code>UnifySecrets</code>](#UnifySecrets)  
+**Read only**: true  
+<a name="UnifySecrets+addEnv"></a>
+
+### unifySecrets.addEnv(name) ⇒ <code>string</code>
 
 Try to add a config value from an environment variable
 
-**Kind**: instance method of [<code>UnifyConfig</code>](#UnifyConfig)  
+**Kind**: instance method of [<code>UnifySecrets</code>](#UnifySecrets)  
 **Returns**: <code>string</code> - - found config value
 
 | Param | Type                |
 | ----- | ------------------- |
 | name  | <code>string</code> |
 
-<a name="UnifyConfig+addSecret"></a>
+<a name="UnifySecrets+addSecret"></a>
 
-### unifyConfig.addSecret(name) ⇒ <code>string</code>
+### unifySecrets.addSecret(name) ⇒ <code>string</code>
 
 Try to add a config value from a docker secret
 
-**Kind**: instance method of [<code>UnifyConfig</code>](#UnifyConfig)  
+**Kind**: instance method of [<code>UnifySecrets</code>](#UnifySecrets)  
 **Returns**: <code>string</code> - - found config value
 
 | Param | Type                |
 | ----- | ------------------- |
 | name  | <code>string</code> |
 
-<a name="UnifyConfig+add"></a>
+<a name="UnifySecrets+add"></a>
 
-### unifyConfig.add(name) ⇒ <code>string</code>
+### unifySecrets.add(name) ⇒ <code>string</code>
 
 Try to add config value from either environment variable or docker secret
 
 If both sources exist, the docker secret will be used.
 
-**Kind**: instance method of [<code>UnifyConfig</code>](#UnifyConfig)  
+**Kind**: instance method of [<code>UnifySecrets</code>](#UnifySecrets)  
 **Returns**: <code>string</code> - - found config value
 
 | Param | Type                |
 | ----- | ------------------- |
 | name  | <code>string</code> |
 
-<a name="UnifyConfig+addList"></a>
+<a name="UnifySecrets+addList"></a>
 
-### unifyConfig.addList(names) ⇒ <code>Array.&lt;string&gt;</code>
+### unifySecrets.addList(names) ⇒ <code>Array.&lt;string&gt;</code>
 
 Try to add all config value in a list
 
-**Kind**: instance method of [<code>UnifyConfig</code>](#UnifyConfig)  
+**Kind**: instance method of [<code>UnifySecrets</code>](#UnifySecrets)  
 **Returns**: <code>Array.&lt;string&gt;</code> - - list of found values (or null for those not found)
 
 | Param | Type                              |
 | ----- | --------------------------------- |
 | names | <code>Array.&lt;string&gt;</code> |
 
-<a name="UnifyConfig+addAllSecrets"></a>
+<a name="UnifySecrets+addAllSecrets"></a>
 
-### unifyConfig.addAllSecrets() ⇒ <code>Array.&lt;string&gt;</code>
+### unifySecrets.addAllSecrets() ⇒ <code>Array.&lt;string&gt;</code>
 
 Add all docker secrets
 
-**Kind**: instance method of [<code>UnifyConfig</code>](#UnifyConfig)  
+**Kind**: instance method of [<code>UnifySecrets</code>](#UnifySecrets)  
 **Returns**: <code>Array.&lt;string&gt;</code> - - list of found secrets

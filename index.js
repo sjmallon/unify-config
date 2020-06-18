@@ -9,9 +9,9 @@ const path = require('path')
  * - under docker-compose using docker secrets
  * - under docker swarm using docker secrets
  *
- * @class UnifyConfig
+ * @class UnifySecrets
  */
-class UnifyConfig {
+class UnifySecrets {
   constructor() {
     this._config = {}
   }
@@ -20,7 +20,7 @@ class UnifyConfig {
    * Get full config object
    *
    * @readonly
-   * @memberof UnifyConfig
+   * @memberof UnifySecrets
    */
   get config() {
     return this._config
@@ -31,7 +31,7 @@ class UnifyConfig {
    *
    * @param {string} name
    * @returns {?string} - found config value
-   * @memberof UnifyConfig
+   * @memberof UnifySecrets
    */
   addEnv(name) {
     if (process.env[name]) {
@@ -47,7 +47,7 @@ class UnifyConfig {
    *
    * @param {string} name
    * @returns  {?string} - found config value
-   * @memberof UnifyConfig
+   * @memberof UnifySecrets
    */
   addSecret(name) {
     let target = path.join('/run/secrets/', name)
@@ -71,7 +71,7 @@ class UnifyConfig {
    *
    * @param {string} name
    * @returns  {?string} - found config value
-   * @memberof UnifyConfig
+   * @memberof UnifySecrets
    */
   add(name) {
     if (this.addSecret(name) || this.addEnv(name)) {
@@ -86,7 +86,7 @@ class UnifyConfig {
    *
    * @param {string[]} names
    * @returns {?string[]} - list of found values (or null for those not found)
-   * @memberof UnifyConfig
+   * @memberof UnifySecrets
    */
   addList(names) {
     return names.map(n => this.add(n))
@@ -96,7 +96,7 @@ class UnifyConfig {
    * Add all docker secrets
    *
    * @returns {string[]} - list of found secrets
-   * @memberof UnifyConfig
+   * @memberof UnifySecrets
    */
   addAllSecrets() {
     let files = fs
@@ -107,4 +107,4 @@ class UnifyConfig {
   }
 }
 
-module.exports = UnifyConfig
+module.exports = UnifySecrets
