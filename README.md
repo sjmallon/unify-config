@@ -1,5 +1,9 @@
 # unify-config
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/sjmallon/unify-config)
+![GitHub](https://img.shields.io/github/license/sjmallon/unify-config)
+![Travis (.org)](https://img.shields.io/travis/sjmallon/unify-config)
+
 A tiny module to make it easier to work with configurations - especially secrets - held in either environment variables, or docker secrets. Useful when a single code base may be used either directly on the local machine (using environment variables), or under docker-compose or a docker swarm, where environment variables are not secure and docker secrets should be used.
 
 ## Installation
