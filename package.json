@@ -1,0 +1,23 @@
+{
+  "name": "unify-config",
+  "version": "0.1.0",
+  "description": "Manage configuration variable obtains from environment or docker secrets",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "config",
+    "docker",
+    "env"
+  ],
+  "author": "Steve Mallon <public.sjmallon@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "jest": "^26.0.1",
+    "jsdoc-to-markdown": "^6.0.1",
+    "mock-fs": "^4.12.0",
+    "prettier": "^2.0.5"
+  }
+}
