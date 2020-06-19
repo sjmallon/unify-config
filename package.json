@@ -1,6 +1,6 @@
 {
   "name": "unify-secrets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Manage configuration variable obtains from environment or docker secrets",
   "main": "index.js",
   "scripts": {
