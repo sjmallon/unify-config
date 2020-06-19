@@ -1,4 +1,4 @@
-# unify-config
+# unify-secrets
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/sjmallon/unify-config)
 ![GitHub](https://img.shields.io/github/license/sjmallon/unify-config)
@@ -16,9 +16,22 @@ npm install --save  unify-config
 
 ### Motivation
 
-<a name="UnifySecrets"></a>
+When developing a server application in node it is [good practice](https://12factor.net/config) to use environment variables for configurations, especially for secrets. With _docker-compose_ and _docker swarm_ however, whilst environment variables can be used, they are not secure, and _docker secrets_ are a better solution. (Despite not being obvious from the docker documentations, [secrets work with docker-compose](https://serverfault.com/questions/871090/how-to-use-docker-secrets-without-a-swarm-cluster/936262#936262) as well as docker swarm.)
 
-## UnifySecrets
+Docker secrets are made available a files mounted at `/run/secrets`, where are environment variable are found at `process.env`. If you use both a local environment with environment variables, and a docker environment with secrets in your development process, your code needs to handle two possible sources of config.
+
+### Typical use
+
+```javascript
+const UnifySecrets = require('unify-secrets')
+
+const c = new UnifySecrets()
+c.addList(['API_TOKEN', 'DATABASE_URL'])
+
+const connection = connectToDatabase(c.DATABASE_URL).
+```
+
+### API
 
 **Kind**: global class
 
