@@ -36,7 +36,7 @@ describe('Environment variables', () => {
     let c = new UnifySecrets()
     let v = c.addEnv('NOT_EXISTING')
     expect(v).toBeNull()
-    expect(c.config.TEST_VAR_78).toBeUndefined()
+    expect(c.config.NOT_EXISTING).toBeUndefined()
   })
 })
 
@@ -52,7 +52,7 @@ describe('Docker secrets', () => {
     let c = new UnifySecrets()
     let v = c.addSecret('nonsecret')
     expect(v).toBeNull()
-    expect(c.config.secret).toBeUndefined()
+    expect(c.config.nonsecret).toBeUndefined()
   })
 })
 
